@@ -1,0 +1,8 @@
+=============== Sep 12, 2023 (UTC) ===============
+12:09:42.122771 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:09:42.127110 db@open opening
+12:09:42.129401 version@stat F·[] S·0B[] Sc·[]
+12:09:42.130941 db@janitor F·2 G·0
+12:09:42.130985 db@open done T·3.855647ms
+12:47:05.453704 db@close closing
+12:47:05.454107 db@close done T·403.478µs
