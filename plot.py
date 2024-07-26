@@ -3,12 +3,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 results_dir = 'results'
-file_paths = [f for f in os.listdir(results_dir) if f.endswith('.csv')]
+file_names = ['296.csv', '310.csv', '320.csv', '333.csv']
+file_paths = [os.path.join(results_dir, file_name) for file_name in file_names]
 
-data_list = {os.path.splitext(file)[0]: pd.read_csv(os.path.join(results_dir, file)) for file in file_paths}
+data_list = {os.path.splitext(os.path.basename(file))[0]: pd.read_csv(file) for file in file_paths}
 all_epochs = sorted(set.union(*[set(data['Epoch']) for data in data_list.values()]))
 standard_cumulative_incentive = [305451 * (epoch + 1) for epoch in range(len(all_epochs))]
 loss_rates = {file_name: {validator_id: [] for validator_id in range(666)} for file_name in data_list}
+
 
 for file_name, data in data_list.items():
     data['Incentive'] = data['Head'] + data['Target'] + data['Source']
@@ -31,7 +33,7 @@ for file_name, data in data_list.items():
 output_dir = os.path.join('results', 'figures')
 os.makedirs(output_dir, exist_ok=True)
 
-for validator_id in range(666):
+for validator_id in range(10):
     plt.figure(figsize=(10, 6))
     for file_name in data_list:
         plt.plot(all_epochs, loss_rates[file_name][validator_id], label=f'f={file_name}')
